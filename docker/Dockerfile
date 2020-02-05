@@ -6,10 +6,16 @@ WORKDIR /opt
 
 RUN apt-get update && apt-get install -y \
     git \
-    parallel \
+    python \
+    python-dev \
+    python-pip \
     vim-tiny
 
-RUN conda install -c bioconda bcftools
-RUN printf 'will cite\n' | parallel --citation
+# Various Python packages
+RUN pip install \
+    pyvcf \
+    pysam \
+    numpy \
+    pytest
 
-COPY . /opt/GATK_GermlineCaller
+COPY . /opt/MergeFilterVCF
