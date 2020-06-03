@@ -1,10 +1,14 @@
 #/bin/bash
 
+# run merge step then filter
+#   - do not pipe, since not big files and want to keep intermediate around
+#   - will need a dry stack
+
 read -r -d '' USAGE <<'EOF'
-Filter merged VCF file to include or exclude calls based on value of "set" INFO field
+Combine VCFs from multiple callers and filter out calls based on which callers detected them
 
 Usage:
-  bash run_merge_filter.sh [options] input.vcf 
+  bash run_filter.sh [options] input.vcf 
 
 Options:
 -h: Print this help message
@@ -14,6 +18,7 @@ Options:
 -B: bypass this filter, i.e., do not remove any calls
 -I include_list: Retain only calls with given caller(s); comma-separated list
 -X exclude_list: Exclude all calls with given caller(s); comma-separated list
+-R: remove filtered variants.  Default is to retain filtered variants with filter name in VCF FILTER field
 
 Arguments -I and -X are mutually exclusive.  If neither is defined, the default is,
 -X varscan_indel,GATK_indel
@@ -26,7 +31,7 @@ SCRIPT=$(basename $0)
 EXCLUDE_DEFAULT="varscan_indel,GATK_indel"
 
 # http://wiki.bash-hackers.org/howto/getopts_tutorial
-while getopts ":hdvo:BI:X:" opt; do
+while getopts ":hdvo:BI:X:R" opt; do
   case $opt in
     h)
       echo "$USAGE"
@@ -49,6 +54,9 @@ while getopts ":hdvo:BI:X:" opt; do
       ;;
     X) # value argument
       EXCLUDE="$OPTARG"
+      ;;
+    R)
+      FILTER_ARG="--no-filtered"
       ;;
     \?)
       >&2 echo "Invalid option: -$OPTARG"
@@ -89,7 +97,7 @@ fi
 
 export PYTHONPATH="/opt/MergeFilterVCF/src:$PYTHONPATH"
 
-MERGE_FILTER="vcf_filter.py --no-filtered --local-script merge_filter.py"  # filter module
+MERGE_FILTER="vcf_filter.py $FILTER_ARG --local-script merge_filter.py"  # filter module
 
 CMD="$MERGE_FILTER $VCF merge $MERGE_ARG "
 
