@@ -22,6 +22,7 @@ EOF
 
 source /opt/MergeFilterVCF/src/utils.sh
 SCRIPT=$(basename $0)
+export PYTHONPATH="/opt/MergeFilterVCF/src:$PYTHONPATH"
 
 # http://wiki.bash-hackers.org/howto/getopts_tutorial
 while getopts ":hdvo:BI:X:R" opt; do
@@ -92,9 +93,9 @@ fi
 
 export PYTHONPATH="/opt/MergeFilterVCF/src:$PYTHONPATH"
 
-MERGE_FILTER="vcf_filter.py $FILTER_ARG --local-script merge_filter.py"  # filter module
+MERGE_FILTER="/usr/local/bin/vcf_filter.py $FILTER_ARG --local-script merge_filter.py"  # filter module
 
-CMD="$MERGE_FILTER $VCF merge $MERGE_ARG "
+CMD="/usr/local/bin/python $MERGE_FILTER $VCF merge $MERGE_ARG "
 
 if [ "$OUT_VCF" ]; then
     CMD="$CMD > $OUT_VCF"

@@ -14,11 +14,13 @@ mkdir -p $OUTD
 #-X exclude_list: Exclude all calls with given caller(s); comma-separated list
 #-R: remove filtered variants.  Default is to retain filtered variants with filter name in VCF FILTER field
 
-INPUT="$OUTD/merge_results_direct/merged.vcf"
+INPUT="$OUTD/merged.vcf"
 
 OUT="$OUTD/merged-filtered.vcf"
 
-CMD="bash ../../src/filter_vcf.sh $@ -o $OUT $INPUT"
+EXCLUDE="-X varscan_indel,GATK_indel"
+
+CMD="bash ../../src/filter_vcf.sh $@ -o $OUT $EXCLUDE $INPUT"
 
 >&2 echo Running $CMD
 eval $CMD
