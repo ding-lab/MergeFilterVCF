@@ -16,7 +16,7 @@ mkdir -p $OUTD
 
 INPUT="$OUTD/merged.vcf"
 
-OUT="$OUTD/merged-filtered-R.vcf"
+OUT="$OUTD/merged-filtered.vcf"
 
 #   4511 gatk_indel
 #    740 gatk_indel-pindel
