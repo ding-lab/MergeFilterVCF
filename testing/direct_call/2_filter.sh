@@ -16,9 +16,20 @@ mkdir -p $OUTD
 
 INPUT="$OUTD/merged.vcf"
 
-OUT="$OUTD/merged-filtered.vcf"
+OUT="$OUTD/merged-filtered-R.vcf"
 
-EXCLUDE="-X varscan_indel,GATK_indel"
+#   4511 gatk_indel
+#    740 gatk_indel-pindel
+#   3758 gatk_indel-varscan_indel
+#   2975 gatk_indel-varscan_indel-pindel
+#  30594 gatk_snv
+#  91226 gatk_snv-varscan_snv
+#    750 pindel
+#    354 varscan_indel
+#     72 varscan_indel-pindel
+#   6438 varscan_snv
+
+EXCLUDE="-X varscan_indel,gatk_indel,varscan_snv,gatk_snv"
 
 CMD="bash ../../src/filter_vcf.sh $@ -o $OUT $EXCLUDE $INPUT"
 

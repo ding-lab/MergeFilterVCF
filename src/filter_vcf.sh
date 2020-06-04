@@ -95,7 +95,10 @@ export PYTHONPATH="/opt/MergeFilterVCF/src:$PYTHONPATH"
 
 MERGE_FILTER="/usr/local/bin/vcf_filter.py $FILTER_ARG --local-script merge_filter.py"  # filter module
 
-CMD="/usr/local/bin/python $MERGE_FILTER $VCF merge $MERGE_ARG "
+#CMD="/usr/local/bin/python $MERGE_FILTER $VCF merge $MERGE_ARG "
+# Getting errors like 
+#    TypeError: startswith first arg must be bytes or a tuple of bytes, not str
+CMD="cat $VCF | /usr/local/bin/python $MERGE_FILTER - merge $MERGE_ARG "
 
 if [ "$OUT_VCF" ]; then
     CMD="$CMD > $OUT_VCF"
