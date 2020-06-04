@@ -25,7 +25,8 @@ EOF
 source /opt/MergeFilterVCF/src/utils.sh
 SCRIPT=$(basename $0)
 
-GATK="/gatk/gatk"
+JAVA="/usr/bin/java"
+JAR="/usr/GenomeAnalysisTK.jar"
 
 OUT_VCF="output/merged.vcf"
 
@@ -92,7 +93,7 @@ VARIANTS="  --variant:GATK_snv $GATK_SNV \\
             --variant:varscan_indel $VARSCAN_INDEL \\
             --variant:pindel $PINDEL "
 
-CMD="$GATK $JAVA_OPTS -R $REF -T CombineVariants -o $OUT_VCF $VARIANTS -priority $PRIORITY $ARGS "
+CMD="$JAVA -jar $JAR $JAVA_OPTS -R $REF -T CombineVariants -o $OUT_VCF $VARIANTS -priority $PRIORITY $ARGS "
 
 run_cmd "$CMD" $DRYRUN
  
