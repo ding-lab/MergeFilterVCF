@@ -11,16 +11,5 @@ RUN apt-get update && apt-get install -y \
     git \
     vim-tiny
 
-#    cython \
-#    python \
-#    python-dev \
-#    python-pip \
-
-## Various Python packages
-#RUN pip install \
-#    pyvcf \
-#    pysam \
-#    numpy \
-#    pytest
-
+COPY docker/vimrc /root/.vimrc
 COPY . /opt/MergeFilterVCF

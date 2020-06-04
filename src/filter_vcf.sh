@@ -1,14 +1,10 @@
-#/bin/bash
-
-# run merge step then filter
-#   - do not pipe, since not big files and want to keep intermediate around
-#   - will need a dry stack
+# bin/bash
 
 read -r -d '' USAGE <<'EOF'
-Combine VCFs from multiple callers and filter out calls based on which callers detected them
+Filter out calls based on which callers detected them
 
 Usage:
-  bash run_filter.sh [options] input.vcf 
+  bash filter_vcf.sh [options] input.vcf 
 
 Options:
 -h: Print this help message
@@ -20,15 +16,12 @@ Options:
 -X exclude_list: Exclude all calls with given caller(s); comma-separated list
 -R: remove filtered variants.  Default is to retain filtered variants with filter name in VCF FILTER field
 
-Arguments -I and -X are mutually exclusive.  If neither is defined, the default is,
--X varscan_indel,GATK_indel
+Arguments -I and -X are mutually exclusive, one or the other must be defined.
 
 EOF
 
 source /opt/MergeFilterVCF/src/utils.sh
 SCRIPT=$(basename $0)
-
-EXCLUDE_DEFAULT="varscan_indel,GATK_indel"
 
 # http://wiki.bash-hackers.org/howto/getopts_tutorial
 while getopts ":hdvo:BI:X:R" opt; do
@@ -90,7 +83,9 @@ if [ "$INCLUDE" ]; then
     fi
 else
     if  [ -z "$EXCLUDE" ]; then
-        EXCLUDE=$EXCLUDE_DEFAULT
+        >&2 echo ERROR: -I INCLUDE or -X EXCLUDE must be defined
+        >&2 echo "$USAGE"
+        exit 1
     fi
     MERGE_ARG="$MERGE_ARG --exclude $EXCLUDE"
 fi
