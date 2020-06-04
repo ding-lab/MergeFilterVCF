@@ -11,7 +11,7 @@ Options:
 -o OUT_VCF : Output VCF filename.  Default: output/merged.vcf
 -R REF : Reference, required
 -P: merge all variants regardless of FILTER status
--N: do not remap IUPAC Ambiguity Codes to N
+-N: remap IUPAC Ambiguity Codes to N
 -p TMPD : specify output directory of filtered VCFs.  Default is same directory as files are in
 -X XARGS : additional arguments passed to CombineVariants
 
@@ -25,14 +25,16 @@ The following files are combined:
 
 priority: gatk_snv,varscan_snv,gatk_indel,varscan_indel,pindel
 
-Two types of filtering are done to input data: retain only FILTER=PASS calls, and 
+Two types of filtering can be done to input data: retain only FILTER=PASS calls, and 
 remap any ambiguity codes in REF (not ACGTN) to N.
 
 Only variants with FILTER value of PASS or . are retained for merging
 unless -P flag is set.  Given input A.vcf, intermediate files filtered.A.vcf are created
 
-Remap IUPAC Ambiguity Codes to N for the reference allele, since this will choke
-CombineVariants.  -N will avoid this remapping
+Optionally remap IUPAC Ambiguity Codes to N for the reference allele, to avoid errors like,
+	unparsable vcf record with allele R
+This generates intermediate files remap_ref.A.vcf.  Because these take up space and this
+problem is rarely seen unless -P is defined, by default we do not do this remapping
 See https://droog.gs.washington.edu/parc/images/iupac.html
 
 EOF
@@ -65,7 +67,7 @@ while getopts ":hdC:R:S:L:l:o:Pp:X:N" opt; do
       NO_PASS_FILTER=1
       ;;
     N) # value argument
-      NO_REF_REMAP=1
+      REF_REMAP=1
       ;;
     p) # value argument
       TMPD="$OPTARG"
@@ -193,7 +195,7 @@ if [ -z $NO_PASS_FILTER ]; then
 	VARSCAN_SNV=$( pass_filter $VARSCAN_SNV ) ; test_exit_status
 fi
 
-if [ -z $NO_REF_REMAP ]; then
+if [ "$REF_REMAP" ]; then
 	GATK_INDEL=$( remap_ref $GATK_INDEL ) ; test_exit_status
 	GATK_SNV=$( remap_ref $GATK_SNV ) ; test_exit_status
 	PINDEL=$( remap_ref $PINDEL ) ; test_exit_status
