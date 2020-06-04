@@ -15,5 +15,8 @@ $IND/varscan.snp.VLD.vcf "
 OUT="$OUTD/merged.vcf"
 
 # Usage: merge_vcf.sh [options] GATK_indel GATK_snv pindel_indel varscan_indel varscan_snv
-bash ../../src/merge_vcf.sh $@ -o $OUT $VCF $CONFIG
+CMD="bash ../../src/merge_vcf.sh $@ -o $OUT -R $REF $IN_VCF"
+
+>&2 echo Running $CMD
+eval $CMD
 
