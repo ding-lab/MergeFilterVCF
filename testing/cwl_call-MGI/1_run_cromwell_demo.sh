@@ -3,12 +3,13 @@
 
 source /opt/lsf9/conf/lsf.conf
 
-CONFIG="cromwell-config.dat"
+CONFIG="cromwell-config-db.dat"
 
-CWL="../../cwl/varscan_vcf_remap.cwl"
-YAML="demo.yaml"
+CWL="../../cwl/SomaticSV.cwl"
+YAML="cwl-yaml/SomaticSV_demo.yaml"
 
-CROMWELL="/opt/cromwell.jar"
+
+CROMWELL="/usr/local/cromwell/cromwell-47.jar"
 
 # from https://confluence.ris.wustl.edu/pages/viewpage.action?spaceKey=CI&title=Cromwell#Cromwell-ConnectingtotheDatabase
 # Connecting to the database section
