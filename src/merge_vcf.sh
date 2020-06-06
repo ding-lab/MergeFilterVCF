@@ -3,8 +3,8 @@
 read -r -d '' USAGE <<'EOF'
 Filter and merge varscan, pindel, and GATK VCFs using GATK CombineVariants
 
-Usage: merge_vcf.sh [options] GATK_indel gatk_snv pindel_indel varscan_indel varscan_snv
- 
+Usage: merge_vcf.sh [options] gatk_indel gatk_snv pindel varscan_indel varscan_snv
+
 Options:
 -h: Print this help message
 -d: Dry run - output commands but do not execute them
@@ -17,26 +17,24 @@ Options:
 
 Combine VCF files from several callers into one
 The following files are combined:
-* varscan SNV         ("varscan_snv")
-* varscan indel       ("varscan_indel")
-* pindel indel        ("pindel")
-* GATK SNV            ("gatk_snv")
 * GATK indel          ("gatk_indel")
+* GATK SNV            ("gatk_snv")
+* pindel indel        ("pindel")
+* varscan indel       ("varscan_indel")
+* varscan SNV         ("varscan_snv")
 
 priority: gatk_snv,varscan_snv,gatk_indel,varscan_indel,pindel
 
-Two types of filtering can be done to input data: retain only FILTER=PASS calls, and 
-remap any ambiguity codes in REF (not ACGTN) to N.
-
-Only variants with FILTER value of PASS or . are retained for merging
-unless -P flag is set.  Given input A.vcf, intermediate files filtered.A.vcf are created
-
-Optionally remap IUPAC Ambiguity Codes to N for the reference allele, to avoid errors like,
-	unparsable vcf record with allele R
-This generates intermediate files remap_ref.A.vcf.  Because these take up space and this
-problem is rarely seen unless -P is defined, by default we do not do this remapping
-See https://droog.gs.washington.edu/parc/images/iupac.html
-
+Two types of filtering can be done to input data: 
+* retain only FILTER=PASS calls
+    Only variants with FILTER value of PASS or . are retained for merging
+    unless -P flag is set.  Given input A.vcf, intermediate files filtered.A.vcf are created
+* remap any ambiguity codes in REF (not ACGTN) to N.
+    Optionally remap IUPAC Ambiguity Codes to N for the reference allele, to avoid errors like,
+        unparsable vcf record with allele R
+    This generates intermediate files remap_ref.A.vcf.  Because these take up space and this
+    problem is rarely seen unless -P is defined, by default we do not do this remapping
+    See https://droog.gs.washington.edu/parc/images/iupac.html  Remapping to N suggested by Chris Miller
 EOF
 
 source /opt/MergeFilterVCF/src/utils.sh

@@ -7,7 +7,7 @@ INPUT="/data/docker_run_output/merged.vcf"
 OUT="/data/docker_run_output/merged-filtered.vcf"
 
 PROCESS="/opt/MergeFilterVCF/src/filter_vcf.sh"
-EXCLUDE="-X varscan_indel,gatk_indel,varscan_snv,gatk_snv"
+EXCLUDE="-X varscan_indel,gatk_indel"
 
 CMD="bash $PROCESS $@ -o $OUT $EXCLUDE $INPUT"
 
