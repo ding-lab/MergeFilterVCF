@@ -101,6 +101,11 @@ MERGE_FILTER="/usr/local/bin/vcf_filter.py $FILTER_ARG --local-script merge_filt
 CMD="cat $VCF | /usr/local/bin/python $MERGE_FILTER - merge $MERGE_ARG "
 
 if [ "$OUT_VCF" ]; then
+
+    OUTD=$(dirname $OUT_VCF)
+    mkdir -p $OUTD
+    test_exit_status
+
     CMD="$CMD > $OUT_VCF"
 fi
 
