@@ -5,8 +5,8 @@ source /opt/lsf9/conf/lsf.conf
 
 CONFIG="cromwell-config-db.dat"
 
-CWL="../../cwl/SomaticSV.cwl"
-YAML="cwl-yaml/SomaticSV_demo.yaml"
+CWL="../../cwl/MergeVCF.cwl"
+YAML="cwl-yaml/MergeVCF_C3L-00001.yaml"
 
 
 CROMWELL="/usr/local/cromwell/cromwell-47.jar"
