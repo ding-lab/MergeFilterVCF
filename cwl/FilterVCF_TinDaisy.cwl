@@ -33,7 +33,7 @@ outputs:
     type: File
     outputBinding:
       glob: output/filtered.vcf
-label: Filter_VCF
+label: Merge_Filter_TD
 arguments:
   - position: 0
     prefix: '-o'
