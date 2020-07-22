@@ -40,7 +40,7 @@ arguments:
     valueFrom: output/filtered.vcf
   - position: 0
     prefix: '-X'
-    valueFrom: 'strelka,varscan,mutect,sindel,varindel,pindel"
+    valueFrom: 'strelka,varscan,mutect,sindel,varindel,pindel'
 requirements:
   - class: ResourceRequirement
     ramMin: 8000
