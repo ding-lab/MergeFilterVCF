@@ -25,7 +25,7 @@ IN_VCF=" \
 /data/call-hotspot_vld_pindel/hotspot_vld.cwl/e5de7d1c-ad01-41b0-90ba-fa22e0428c5d/call-hotspotfilter/execution/output/HotspotFiltered.vcf 
 "
 
-OUTD="./results"
+OUTD="/results"
 OUT="$OUTD/merged.vcf"
 
 # Usage: merge_vcf_TinDaisy.sh [options] strelka sindel varscan varindel mutect pindel

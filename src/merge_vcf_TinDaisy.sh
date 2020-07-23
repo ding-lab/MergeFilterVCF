@@ -94,7 +94,8 @@ if [ "$#" -ne 6 ]; then
 fi
 
 function pass_filter {
-	INVCF=$1
+    TMP_ID=$1     # Unique identifier so names don't clash
+	INVCF=$2
 
 	if [ -z $TMPD ]; then
 		TMPD_L=$(dirname $INVCF)
@@ -105,15 +106,17 @@ function pass_filter {
 	test_exit_status
 
 	FN=$(basename $INVCF)
-	OUT="$TMPD_L/filtered.$FN"
-	
+	OUT="$TMPD_L/pass_filter.${TMP_ID}.$FN"
+    >&2 echo Writing pass_filter to file $OUT
+
 	CMD="awk 'BEGIN{FS=\"\\t\";OFS=\"\\t\"}{if (\$0 ~ /^#/) print; else if (\$7 == \"PASS\" || \$7 == \".\") print}' $INVCF > $OUT"
 	run_cmd "$CMD" $DRYRUN
 	echo $OUT
 }
 
 function remap_ref {
-	INVCF=$1
+    TMP_ID=$1     # Unique identifier so names don't clash
+	INVCF=$2
 
 	if [ -z $TMPD ]; then
 		TMPD_L=$(dirname $INVCF)
@@ -124,7 +127,7 @@ function remap_ref {
 	test_exit_status
 
 	FN=$(basename $INVCF)
-	OUT="$TMPD_L/remap_ref.$FN"
+	OUT="$TMPD_L/remap_ref.${TMP_ID}.$FN"
 	
 	CMD="awk 'BEGIN{FS=\"\\t\";OFS=\"\\t\"}{if (\$0 ~ /^#/) print; else if (\$4 !~ /[ACGTN]/) \$4 = \"N\"; print}' $INVCF > $OUT"
 
@@ -163,21 +166,21 @@ confirm $REF
 # To keep things simple, by default we retain only PASS variants
 
 if [ -z $NO_PASS_FILTER ]; then
-    STRELKA_SNV=$( pass_filter $STRELKA_SNV ) ; test_exit_status
-    STRELKA_INDEL=$( pass_filter $STRELKA_INDEL ) ; test_exit_status
-    VARSCAN_SNV=$( pass_filter $VARSCAN_SNV ) ; test_exit_status
-    VARSCAN_INDEL=$( pass_filter $VARSCAN_INDEL ) ; test_exit_status
-    MUTECT=$( pass_filter $MUTECT ) ; test_exit_status
-    PINDEL=$( pass_filter $PINDEL ) ; test_exit_status
+    STRELKA_SNV=$( pass_filter strelka_snv $STRELKA_SNV ) ; test_exit_status
+    STRELKA_INDEL=$( pass_filter strelka_indel $STRELKA_INDEL ) ; test_exit_status
+    VARSCAN_SNV=$( pass_filter varscan_snv $VARSCAN_SNV ) ; test_exit_status
+    VARSCAN_INDEL=$( pass_filter varscan_indel $VARSCAN_INDEL ) ; test_exit_status
+    MUTECT=$( pass_filter mutect $MUTECT ) ; test_exit_status
+    PINDEL=$( pass_filter pindel $PINDEL ) ; test_exit_status
 fi
 
 if [ "$REF_REMAP" ]; then
-    STRELKA_SNV=$( refmap_ref $STRELKA_SNV ) ; test_exit_status
-    STRELKA_INDEL=$( refmap_ref $STRELKA_INDEL ) ; test_exit_status
-    VARSCAN_SNV=$( refmap_ref $VARSCAN_SNV ) ; test_exit_status
-    VARSCAN_INDEL=$( refmap_ref $VARSCAN_INDEL ) ; test_exit_status
-    MUTECT=$( refmap_ref $MUTECT ) ; test_exit_status
-    PINDEL=$( refmap_ref $PINDEL ) ; test_exit_status
+    STRELKA_SNV=$( remap_ref strelka_snv $STRELKA_SNV ) ; test_exit_status
+    STRELKA_INDEL=$( remap_ref strelka_indel $STRELKA_INDEL ) ; test_exit_status
+    VARSCAN_SNV=$( remap_ref varscan_snv $VARSCAN_SNV ) ; test_exit_status
+    VARSCAN_INDEL=$( remap_ref varscan_indel $VARSCAN_INDEL ) ; test_exit_status
+    MUTECT=$( remap_ref mutect $MUTECT ) ; test_exit_status
+    PINDEL=$( remap_ref pindel $PINDEL ) ; test_exit_status
 fi
 
 OUTD=$(dirname $OUT_VCF)
