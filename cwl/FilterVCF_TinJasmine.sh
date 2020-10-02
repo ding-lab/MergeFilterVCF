@@ -1,6 +1,6 @@
 class: CommandLineTool
 cwlVersion: v1.0
-id: merge_filter
+id: merge_filter_tj
 baseCommand:
   - /bin/bash
   - /opt/MergeFilterVCF/src/filter_vcf.sh

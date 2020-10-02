@@ -3,7 +3,7 @@ cwlVersion: v1.0
 id: merge_vcf_td
 baseCommand:
   - /bin/bash
-  - /opt/MergeFilterVCF/src/merge_vcf.sh
+  - /opt/MergeFilterVCF/src/merge_vcf_TinDaisy.sh
 inputs:
   - id: reference
     type: File
