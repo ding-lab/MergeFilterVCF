@@ -1,0 +1,25 @@
+xargs: a_string  # type "string" (optional)
+ref_remap: false  # type "boolean" (optional)
+merge_all: false  # type "boolean" (optional)
+dryrun: false  # type "boolean" (optional)
+pindel_vcf:  # type "File"
+    class: File
+    path: a/file/path
+mutect_vcf:  # type "File"
+    class: File
+    path: a/file/path
+varscan_indel_vcf:  # type "File"
+    class: File
+    path: a/file/path
+varscan_snv_vcf:  # type "File"
+    class: File
+    path: a/file/path
+strelka_indel_vcf:  # type "File"
+    class: File
+    path: a/file/path
+strelka_snv_vcf:  # type "File"
+    class: File
+    path: a/file/path
+reference:  # type "File"
+    class: File
+    path: a/file/path
