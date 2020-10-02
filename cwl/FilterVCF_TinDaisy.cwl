@@ -45,5 +45,5 @@ requirements:
   - class: ResourceRequirement
     ramMin: 8000
   - class: DockerRequirement
-    dockerPull: mwyczalkowski/merge_vcf_filter:20200608
+    dockerPull: mwyczalkowski/merge_vcf_filter:20201002
   - class: InlineJavascriptRequirement
