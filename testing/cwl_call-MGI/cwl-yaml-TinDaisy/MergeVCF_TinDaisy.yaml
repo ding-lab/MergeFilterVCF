@@ -1,4 +1,3 @@
-xargs: a_string  # type "string" (optional)
 ref_remap: false  # type "boolean" (optional)
 merge_all: false  # type "boolean" (optional)
 dryrun: false  # type "boolean" (optional)

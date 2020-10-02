@@ -1,0 +1,6 @@
+remove_filtered: false  # type "boolean" (optional)
+bypass: false  # type "boolean" (optional)
+dryrun: false  # type "boolean" (optional)
+input_vcf:  # type "File"
+    class: File
+    path: /gscmnt/gc2541/cptac3_analysis/cromwell-workdir/cromwell-executions/MergeVCF_TinDaisy.cwl/65aa253a-2a8d-4ecb-b2f0-29387af9f8fe/call-MergeVCF_TinDaisy.cwl/execution/output/merged.vcf

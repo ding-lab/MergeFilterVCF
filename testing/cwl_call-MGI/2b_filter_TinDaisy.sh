@@ -5,7 +5,7 @@ source /opt/lsf9/conf/lsf.conf
 
 CONFIG="cromwell-config-db.dat"
 
-CWL="../../cwl/FilterVCF_TinDaisy"
+CWL="../../cwl/FilterVCF_TinDaisy.cwl"
 YAML="cwl-yaml-TinDaisy/FilterVCF_TinDaisy.yaml"
 
 CROMWELL="/usr/local/cromwell/cromwell-47.jar"
@@ -25,3 +25,4 @@ if [[ $rc != 0 ]]; then
     exit $rc;
 fi
 
+# Output : /gscmnt/gc2541/cptac3_analysis/cromwell-workdir/cromwell-executions/FilterVCF_TinDaisy.cwl/4c4b4121-099c-4f8c-9ee8-4e5000219e42/call-FilterVCF_TinDaisy.cwl/execution/output/filtered.vcf

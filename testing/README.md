@@ -5,3 +5,4 @@ Several levels of calls available for testing
 - cwl\_call: Run rabix or Cromwell workflow manager to call CWL workflow
 
 Scripts here test both TinDaisy (somatic) and TinJasmine (germline) pipelines
+
