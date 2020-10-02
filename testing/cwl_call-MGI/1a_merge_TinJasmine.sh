@@ -5,7 +5,7 @@ source /opt/lsf9/conf/lsf.conf
 
 CONFIG="cromwell-config-db.dat"
 
-CWL="../../cwl/MergeVCF.cwl"
+CWL="../../cwl/MergeVCF_TinJasmine.cwl"
 YAML="cwl-yaml/MergeVCF_C3L-00001.yaml"
 
 

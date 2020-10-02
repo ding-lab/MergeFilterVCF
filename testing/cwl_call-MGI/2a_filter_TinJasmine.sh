@@ -5,7 +5,7 @@ source /opt/lsf9/conf/lsf.conf
 
 CONFIG="cromwell-config-db.dat"
 
-CWL="../../cwl/FilterVCF.cwl"
+CWL="../../cwl/FilterVCF_TinJasmine.cwl"
 YAML="cwl-yaml/FilterVCF_C3L-00001.yaml"
 
 

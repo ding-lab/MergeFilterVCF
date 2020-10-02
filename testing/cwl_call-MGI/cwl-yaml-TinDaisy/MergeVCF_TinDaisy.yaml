@@ -1,0 +1,27 @@
+xargs: a_string  # type "string" (optional)
+ref_remap: false  # type "boolean" (optional)
+merge_all: false  # type "boolean" (optional)
+dryrun: false  # type "boolean" (optional)
+pindel_vcf:  # type "File"
+    class: File
+    path: /gscmnt/gc2541/cptac3_analysis/cromwell-workdir/cromwell-executions/tindaisy-hotspot.cwl/47c63123-dab6-417b-a431-c9aa9589e6e4/results/call-hotspot_vld_pindel/hotspot_vld.cwl/e5de7d1c-ad01-41b0-90ba-fa22e0428c5d/call-hotspotfilter/execution/output/HotspotFiltered.vcf 
+mutect_vcf:  # type "File"
+    class: File
+    path: /gscmnt/gc2541/cptac3_analysis/cromwell-workdir/cromwell-executions/tindaisy-hotspot.cwl/47c63123-dab6-417b-a431-c9aa9589e6e4/results/call-hotspot_vld_mutect/hotspot_vld.cwl/f5a823e8-707b-4a1e-b5d6-a1c0ae021bea/call-hotspotfilter/execution/output/HotspotFiltered.vcf 
+varscan_indel_vcf:  # type "File"
+    class: File
+    path: /gscmnt/gc2541/cptac3_analysis/cromwell-workdir/cromwell-executions/tindaisy-hotspot.cwl/47c63123-dab6-417b-a431-c9aa9589e6e4/results/call-hotspot_vld_varscan_indel/hotspot_vld.cwl/e0cef30e-1d27-40ad-8f1c-18d1e3a291b7/call-hotspotfilter/execution/output/HotspotFiltered.vcf 
+varscan_snv_vcf:  # type "File"
+    class: File
+    path: /gscmnt/gc2541/cptac3_analysis/cromwell-workdir/cromwell-executions/tindaisy-hotspot.cwl/47c63123-dab6-417b-a431-c9aa9589e6e4/results/call-hotspot_vld_varscan_snv/hotspot_vld.cwl/27ac9be3-7575-4477-8f85-5d3652992ee9/call-hotspotfilter/execution/output/HotspotFiltered.vcf 
+strelka_indel_vcf:  # type "File"
+    class: File
+    path: /gscmnt/gc2541/cptac3_analysis/cromwell-workdir/cromwell-executions/tindaisy-hotspot.cwl/47c63123-dab6-417b-a431-c9aa9589e6e4/results/call-hotspot_vld_strelka_indel/hotspot_vld.cwl/8996e5d4-2692-49df-814a-5f5319947369/call-hotspotfilter/execution/output/HotspotFiltered.vcf 
+strelka_snv_vcf:  # type "File"
+    class: File
+    path: /gscmnt/gc2541/cptac3_analysis/cromwell-workdir/cromwell-executions/tindaisy-hotspot.cwl/47c63123-dab6-417b-a431-c9aa9589e6e4/results/call-hotspot_vld_strelka_snv/hotspot_vld.cwl/312c678b-11be-416e-935f-227ae03386e1/call-hotspotfilter/execution/output/HotspotFiltered.vcf 
+reference:  # type "File"
+    class: File
+    path: # /diskmnt/Datasets/Reference/GRCh38.d1.vd1/GRCh38.d1.vd1.fa
+
+
