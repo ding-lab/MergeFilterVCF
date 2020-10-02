@@ -3,6 +3,9 @@ IMAGE=$IMAGE_GATK
 
 #DATD="/home/mwyczalk_test/Projects/GermlineCaller/C3L-00001"
 
+OUTD="./results"
+mkdir -p $OUTD
+
 REFD="/diskmnt/Datasets/Reference"
 
 DATAD="/home/mwyczalk_test/Projects/TinDaisy/testing/C3L-00908-data/dat"
@@ -10,7 +13,7 @@ REF="/Reference/GRCh38.d1.vd1/GRCh38.d1.vd1.fa"
 
 PROCESS="/opt/MergeFilterVCF/src/merge_vcf_TinDaisy.sh"
 
-OUT="/data/docker_run_output/merged.vcf"
+OUT="/results/merged.vcf"
 
 IN_VCF=" \
 /data/call-hotspot_vld_strelka_snv/hotspot_vld.cwl/312c678b-11be-416e-935f-227ae03386e1/call-hotspotfilter/execution/output/HotspotFiltered.vcf \
@@ -24,7 +27,7 @@ IN_VCF=" \
 CMD="bash $PROCESS $@ -o $OUT -R $REF $IN_VCF"
 
 ARGS="-M docker -l"
-DCMD="../../docker/WUDocker/start_docker.sh $@ $ARGS -I $IMAGE -c \"$CMD\" $DATD:/data $REFD:/Reference $OUTD:/results"
+DCMD="../../docker/WUDocker/start_docker.sh $@ $ARGS -I $IMAGE -c \"$CMD\" $DATAD:/data $REFD:/Reference $OUTD:/results"
 
 # bash docker/WUDocker/start_docker.sh $@ -I $IMAGE $DATAD:/data $REFD:/Reference $OUTD:/results
 
