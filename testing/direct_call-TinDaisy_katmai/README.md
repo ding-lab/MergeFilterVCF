@@ -1,3 +1,5 @@
+# TinDaisy 
+
 Direct testing of merge filter for TinDaisy on katmai
 
 Based on 
@@ -30,10 +32,3 @@ RESULTS/call-hotspot_vld_varscan_indel/hotspot_vld.cwl/e0cef30e-1d27-40ad-8f1c-1
 
 call-hotspot_vld_varscan_snv/
 RESULTS/call-hotspot_vld_varscan_snv/hotspot_vld.cwl/27ac9be3-7575-4477-8f85-5d3652992ee9/call-hotspotfilter/execution/output/HotspotFiltered.vcf
-
-
-
-
-
-
-
