@@ -76,5 +76,5 @@ requirements:
   - class: ResourceRequirement
     ramMin: 8000
   - class: DockerRequirement
-    dockerPull: mwyczalkowski/merge_vcf_gatk:20201002
+    dockerPull: mwyczalkowski/merge_vcf_gatk:20220221
   - class: InlineJavascriptRequirement
