@@ -1,4 +1,4 @@
-OUTD="/data/merge_results_direct"
+OUTD="/results/merge_results_direct"
 mkdir -p $OUTD
 
 #Usage:
