@@ -3,10 +3,10 @@
 
 source /opt/ibm/lsfsuite/lsf/conf/lsf.conf
 
-CWL="../../../cwl/ffpe_filter_parse_vcf.cwl"
+CWL="../../cwl/FilterVCF_TinJasmine.cwl"
 
-CONFIG="dat/cromwell-config-db.compute1.dat"
-YAML="dat/ffpe_filter_parse_vcf.C3L-01039.yaml"
+CONFIG="config/cromwell-config-db.compute1.dat"
+YAML="config/FilterVCF_TinJasmine-C3L-00102.yaml"
 
 CROMWELL="/usr/local/cromwell/cromwell-47.jar"
 

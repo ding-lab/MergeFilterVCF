@@ -1,0 +1,3 @@
+input_vcf:  # type "File"
+    class: File
+    path: /scratch1/fs1/dinglab/m.wyczalkowski/cromwell-data/cromwell-workdir/cromwell-executions/MergeVCF_TinJasmine.cwl/23d7fab1-e3c9-4eae-b0a1-024ada74c41d/call-MergeVCF_TinJasmine.cwl/execution/output/merged.vcf
