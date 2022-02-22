@@ -59,7 +59,8 @@ Implementation is based on GATK 3.8 CombineVariants
 
 Filters calls based on the value of the `set` field which is written to the merged VCF file.  
 
-For TinJasmine, require 2/3 consensus for indels, so variants which are called by only by `varscan_indel` or `gatk_indel` are excluded.
+For TinJasmine, require 2/3 consensus for indels, so variants which are called by only by `varscan_indel` or `gatk_indel` are excluded, i.e.,
+`--exclude varscan_indel,gatk_indel`
 
 For TinDaisy, require 2/3 consensus for both indels and snv, so exclude variants reported by just one caller, i.e.,
 `--exclude strelka,varscan,mutect,sindel,varindel,pindel`
