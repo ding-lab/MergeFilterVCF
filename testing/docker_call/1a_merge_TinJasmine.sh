@@ -1,27 +1,40 @@
 source ../../docker/docker_image.sh
 IMAGE=$IMAGE_GATK
 
-DATD="/home/mwyczalk_test/Projects/GermlineCaller/C3L-00001"
-REFD="/diskmnt/Datasets/Reference"
+cd ../..
+
+DATAD="/scratch1/fs1/dinglab/m.wyczalkowski/cromwell-data/cromwell-workdir/cromwell-executions/TinJasmine.cwl/b50a25fa-ee76-40dd-9abf-4abcca8157ea"
+REFD="/storage1/fs1/dinglab/Active/Resources/References"
 
 REF="/Reference/GRCh38.d1.vd1/GRCh38.d1.vd1.fa"
 
-PROCESS="/opt/MergeFilterVCF/src/merge_vcf.sh"
+PROCESS="/opt/MergeFilterVCF/src/merge_vcf_TinJasmine.sh"
 
-OUT="/data/docker_run_output/merged.vcf"
+# CMD="bash ../../src/merge_vcf_TinJasmine.sh $@ $REMAP_ARG -o $OUT -R $REF $IN_VCF"
 
-IND="/data/VLD_FilterVCF.out"
+OUTD="testing-output/merge_results_docker/docker_run_TinJasmine"
+mkdir -p $OUTD
+OUT="/results/merged.vcf"  
+
 IN_VCF=" \
-$IND/GATK.indel.VLD.vcf \
-$IND/GATK.snp.VLD.vcf \
-$IND/pindel.VLD.vcf \
-$IND/varscan.indel.VLD.vcf \
-$IND/varscan.snp.VLD.vcf "
+/data/call-vld_filter_gatk_indel/execution/VLD_FilterVCF_output.vcf \
+/data/call-vld_filter_gatk_snp/execution/VLD_FilterVCF_output.vcf \
+/data/call-vld_filter_pindel/execution/VLD_FilterVCF_output.vcf \
+/data/call-vld_filter_varscan_indel/execution/VLD_FilterVCF_output.vcf \
+/data/call-vld_filter_varscan_snp/execution/VLD_FilterVCF_output.vcf"
 
-CMD="bash $PROCESS $@ -o $OUT -R $REF $IN_VCF"
+# -N does the ref_remap
+CMD="bash $PROCESS $@ -N -o $OUT -R $REF $IN_VCF"
+VOLUME_MAPPING="$DATAD:/data $REFD:/Reference $OUTD:/results"
 
-ARGS="-M docker -l"
-DCMD="../../docker/WUDocker/start_docker.sh $@ $ARGS -I $IMAGE -c \"$CMD\" $DATD:/data $REFD:/Reference"
+# testing on compute1 is easier if 
+# -r - remapping of paths
+# -g -K - waits until job done before returning
+# no -l flag - writes to logs directory
+ARGS="-M compute1 -r -g -K " # -g -K blocks bsub until done
+
+DCMD="bash docker/WUDocker/start_docker.sh $@ $ARGS -I $IMAGE -c \"$CMD\" $VOLUME_MAPPING"
+
 >&2 echo Running: $DCMD
 eval $DCMD
 

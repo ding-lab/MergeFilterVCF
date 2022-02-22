@@ -9,7 +9,6 @@ REMAP_ARG="-N"
 
 # maps to /data
 # DATAD="/scratch1/fs1/dinglab/m.wyczalkowski/cromwell-data/cromwell-workdir/cromwell-executions/TinJasmine.cwl/b50a25fa-ee76-40dd-9abf-4abcca8157ea"
-IND="/data/VLD_FilterVCF.out"
 
 IN_VCF=" \
 /data/call-vld_filter_gatk_indel/execution/VLD_FilterVCF_output.vcf \
